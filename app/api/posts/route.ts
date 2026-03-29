@@ -5,6 +5,8 @@ import { isAuthenticated } from '@/lib/auth'
 import { calculateReadingTime } from '@/lib/reading-time'
 import { slugify } from '@/lib/slugify'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const search = searchParams.get('search') ?? ''

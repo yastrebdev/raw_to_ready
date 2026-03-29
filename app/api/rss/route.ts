@@ -1,6 +1,8 @@
 // app/api/rss/route.ts
 import { generateRSS } from '@/lib/rss'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   const xml = await generateRSS()
   return new Response(xml, {

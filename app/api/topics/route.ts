@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prisma'
 import { isAuthenticated } from '@/lib/auth'
 import { slugify } from '@/lib/slugify'
 
+export const dynamic = 'force-dynamic'
+
 const COLORS = [
   '#2563EB', '#059669', '#D97706', '#7C3AED',
   '#DB2777', '#0891B2', '#65A30D', '#DC2626',
