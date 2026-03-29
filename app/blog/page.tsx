@@ -7,12 +7,12 @@ import TopicFilter from '@/components/TopicFilter'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Articles',
   description: 'Все статьи о Data Engineering — архитектура данных, пайплайны, инструменты.',
 }
-
-export const revalidate = 60
 
 interface PageProps {
   searchParams: Promise<{ search?: string; topic?: string; page?: string }>

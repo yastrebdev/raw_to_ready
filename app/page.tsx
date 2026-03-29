@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import PostCard from '@/components/PostCard'
 
-export const revalidate = 60 // ISR every 60s
+export const dynamic = 'force-dynamic'
 
 async function getLatestPosts() {
   return prisma.post.findMany({
