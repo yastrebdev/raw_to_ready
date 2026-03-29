@@ -8,7 +8,7 @@ import MarkdownRenderer from '@/components/MarkdownRenderer'
 import TopicBadge from '@/components/TopicBadge'
 import TableOfContents from '@/components/TableOfContents'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -44,6 +44,18 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
     },
+  }
+}
+
+export async function generateStaticParams() {
+  try {
+    const posts = await prisma.post.findMany({
+      where: { published: true },
+      select: { slug: true },
+    })
+    return posts.map((p) => ({ slug: p.slug }))
+  } catch {
+    return []
   }
 }
 
