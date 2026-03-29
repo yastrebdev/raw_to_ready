@@ -5,10 +5,15 @@ import { prisma } from '@/lib/prisma'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rawtoready.com'
 
-  const posts = await prisma.post.findMany({
-    where: { published: true },
-    select: { slug: true, updatedAt: true },
-  })
+  let posts: { slug: string; updatedAt: Date }[] = []
+  try {
+    posts = await prisma.post.findMany({
+      where: { published: true },
+      select: { slug: true, updatedAt: true },
+    })
+  } catch {
+    // DB not available during build
+  }
 
   const postUrls = posts.map((post) => ({
     url: `${siteUrl}/blog/${post.slug}`,
